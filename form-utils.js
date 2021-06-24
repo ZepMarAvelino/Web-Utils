@@ -117,11 +117,12 @@ function replaceId($block, id, idx) {
   else if($temp.is("textarea")) {
     $temp.val("");
   }
+  //$temp.siblings("label").prop("for", $temp.id);
 }
 
 function linkLabels() {
-  $("input").each(function () {
-    $(this).siblings("label").prop("for", this.id);
+  $("input, textarea, select").each(function () {
+    $(this).siblings("label").prop("for", this.name);
     $(`.fieldset`).each(function () {
       $(this).changeElementType("fieldset");
     });
