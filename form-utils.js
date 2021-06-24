@@ -117,7 +117,7 @@ function replaceId($block, id, idx) {
   else if($temp.is("textarea")) {
     $temp.val("");
   }
-  //$temp.siblings("label").prop("for", $temp.id);
+  $temp.siblings("label").prop("for", id+idx);
 }
 
 function linkLabels() {
