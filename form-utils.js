@@ -22,10 +22,8 @@ class FormBlock {
     this.add_button_id = add_button_id;
     this.datepicker_format = datepicker_format;
 
-    let that = this;
-
-    $(`#${this.add_button_id}`).on("click", function () {
-      that.addFormBlock();
+    $(`#${this.add_button_id}`).on("click", () => {
+      this.addFormBlock();
     });
     
     this.bindRemoveButton(1);
@@ -35,49 +33,46 @@ class FormBlock {
   }
 
   bindRemoveButton = (index) => {
-    let that = this;
-    $(`#${this.remove_button_id}${index}`).on("click", function () {
-      that.removeFormBlock(index);
+    $(`#${this.remove_button_id}${index}`).on("click", () => {
+      this.removeFormBlock(index);
     });
   };
 
   addFormBlock = () => {
     var n;
-    let that = this;
-    if (that.total_elems >= that.max_elems) {
+    if (this.total_elems >= this.max_elems) {
       return;
     }
-    ++that.total_elems;
-    $("." + that.remove_button_class).css("display", "block");
-    if (!(that.removed_index === undefined || that.removed_index.length == 0)) {
-      n = that.removed_index.shift();
+    ++this.total_elems;
+    $("." + this.remove_button_class).css("display", "block");
+    if (!(this.removed_index === undefined || this.removed_index.length == 0)) {
+      n = this.removed_index.shift();
     } else {
-      n = ++that.current_index;
+      n = ++this.current_index;
     }
-    that.$block = $("." + that.wrapper_class + ":last")
+    this.$block = $("." + this.wrapper_class + ":last")
       .clone()
-      .prop("id", that.wrapper_id_base + n);
+      .prop("id", this.wrapper_id_base + n);
 
-    for (let id of that.id_names) {
-      replaceId(that.$block, id, n);
+    for (let id of this.id_names) {
+      replaceId(this.$block, id, n);
     }
-    that.$block.find(`[id*="${that.remove_button_id}"]`).prop("id", that.remove_button_id + n);
-    applyDatepicker(that.$block, that.datepicker_format);
-    $("." + that.wrapper_class + ":last").after(that.$block);
-    that.bindRemoveButton(n);
+    this.$block.find(`[id*="${this.remove_button_id}"]`).prop("id", this.remove_button_id + n);
+    applyDatepicker(this.$block, this.datepicker_format);
+    $("." + this.wrapper_class + ":last").after(this.$block);
+    this.bindRemoveButton(n);
   };
 
   removeFormBlock = (index) => {
-    let that = this;
-    if (that.total_elems <= 1) {
+    if (this.total_elems <= 1) {
       return;
     }
-    that.removed_index.push(index);
-    --that.total_elems;
-    $("#" + that.wrapper_id_base + index).remove();
+    this.removed_index.push(index);
+    --this.total_elems;
+    $("#" + this.wrapper_id_base + index).remove();
 
-    if (that.total_elems <= 1) {
-      $("." + that.remove_button_class).css("display", "none");
+    if (this.total_elems <= 1) {
+      $("." + this.remove_button_class).css("display", "none");
     }
   };
 }
@@ -88,10 +83,8 @@ class FileUpload {
     this.upload_id_base = file_upload_id_base;
     this.counter = 1;
 
-    let that = this;
-
-    $(`#${this.add_button}`).on("click", function () {
-      that.addFileUpload();
+    $(`#${this.add_button}`).on("click", () => {
+      this.addFileUpload();
     });
   }
 
