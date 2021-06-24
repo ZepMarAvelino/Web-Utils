@@ -121,7 +121,7 @@ function replaceId($block, id, idx) {
 
 function linkLabels() {
   $("input").each(function () {
-    $(this).siblings("label").prop("for", this.name);
+    $(this).siblings("label").prop("for", this.id);
     $(`.fieldset`).each(function () {
       $(this).changeElementType("fieldset");
     });
